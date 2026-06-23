@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { registerApi } from '../api/authApi';
 
 const Register = () => {
 
@@ -6,8 +7,18 @@ const Register = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = (e: React.SyntheticEvent)=>{
-
+  const handleSubmit = async (e: React.FormEvent)=>{
+    e.preventDefault();
+    try{
+      const response = await registerApi(name, email, password);
+      console.log(response);
+    }catch(err)
+    {
+      if(err instanceof Error)
+      {
+        console.log(err.message);
+      }
+    }
   }
 
   return (
