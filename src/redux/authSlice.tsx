@@ -16,13 +16,15 @@ interface LoginPayload{
 export interface AuthState{
     user: User | null,
     token: string | null,
-    isAuthenticated: boolean
+    isAuthenticated: boolean,
+    loading: boolean
 }
 
 const initialState : AuthState = {
     user: null,
     token: null,
-    isAuthenticated: false
+    isAuthenticated: false,
+    loading: true
 }
 
 export const authSlice = createSlice({
@@ -32,12 +34,14 @@ export const authSlice = createSlice({
         loginSuccess: (state, action: PayloadAction<LoginPayload>)=>{
             state.user = action.payload.user;
             state.token = action.payload.token;
-            state.isAuthenticated = true
+            state.isAuthenticated = true;
+            state.loading = false;
         },
         logout: (state) =>{
             state.user = null;
             state.token = null;
             state.isAuthenticated = false;
+            state.loading = false;
         }
     }
 })
