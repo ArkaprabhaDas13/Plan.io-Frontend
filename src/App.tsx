@@ -16,7 +16,12 @@ const App = () => {
      const initializeAuth = async()=>{
         // load the token and the user details on page refresh from the Local Storage
         const token = localStorage.getItem("token");
-    
+        const user = localStorage.getItem("user");
+        if(!token || !user)
+        {
+          dispatch(logout());
+          return;
+        }
         try{
           // call the /aboutMe api 
           const response = await getUserDetails(token);

@@ -2,7 +2,7 @@ import React from 'react'
 import NavigationCards from './NavigationCards'
 
 const NavigationSection = () => {
-    const arr = ["Tasks", "Projects", "Comments"]
+    const arr = ["tasks", "projects", "comments"]
     return (
         <div>
             <h1>NavigationSection</h1>
@@ -10,7 +10,7 @@ const NavigationSection = () => {
             <div>
 
                 {
-                    arr.map((item)=>(<NavigationCards name={item}/>))
+                    arr.map((item)=>(<NavigationCards key={item} name={item}/>))
                 }
 
             </div>

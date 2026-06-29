@@ -14,6 +14,8 @@ const Dashboard = () => {
 
   const handleLogout = async ()=>{
     dispatch(logout());
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
   }
 
   return (
