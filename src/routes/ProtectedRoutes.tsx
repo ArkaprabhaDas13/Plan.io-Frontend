@@ -4,6 +4,7 @@ import Login from '../pages/Login';
 import { useSelector } from 'react-redux'
 import type { RootState } from '../redux/store'
 import type { ReactNode } from 'react';
+import Loading from '../pages/Loading';
 
 
 interface ProtectedRoutesProps{
@@ -14,9 +15,14 @@ const ProtectedRoutes = ({children}: ProtectedRoutesProps) => {
 
     const user = useSelector((state: RootState) => state.auth.user);
     const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-    console.log(user);
+    const loading = useSelector((state: RootState) => state.auth.loading);
 
     // const isAuthenticated = true;
+
+    if(loading)
+    {
+        return <Loading/>
+    }
 
     if(!isAuthenticated)
     {
