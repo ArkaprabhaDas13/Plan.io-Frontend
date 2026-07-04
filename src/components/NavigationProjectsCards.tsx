@@ -2,25 +2,21 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Navigate } from 'react-router-dom';
 
-interface NavigationCardsProps {
-  name: string
-}
-
-const NavigationCards = ({name}: NavigationCardsProps) => {
+const NavigationProjectsCards = () => {
 
   const navigate = useNavigate();
 
   const handleNavigationClick = ()=>{
-    navigate(`/${name}`);
+    navigate(`/projects`);
   }
 
   return (
     <div>
-        <h1>{name}</h1>
+        <h1>Projects</h1>
         <button onClick={handleNavigationClick}>see all</button>
     </div>
 
   )
 }
 
-export default NavigationCards
+export default NavigationProjectsCards
