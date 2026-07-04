@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import ProjectComponent from '../components/Project/ProjectComponent'
-import type {Types} from 'mongoose'
 import { createProject } from '../api/projectsApi'
 import { getAllProjects } from '../api/projectsApi'
 import { deleteProject } from '../api/projectsApi'
+import { editProject } from '../api/projectsApi'
 
 interface Project{
   _id: string;
@@ -12,6 +12,11 @@ interface Project{
   groupId: string;
   createdBy: string;
   status: string;
+}
+
+interface ProjectPayload{
+    name: string,
+    description: string
 }
 
 const Projects = () => {
@@ -46,6 +51,15 @@ const Projects = () => {
     setAllProjects(updatedProjects);
   }
 
+  const handleEditProject = async (projectId: string, payload: ProjectPayload)=>{
+    const updatedProject = await editProject(projectId, payload);
+    console.log("Updated Project = ", updatedProject);
+    const newProjects = allProjects.map((project)=>(
+      project._id === projectId ? updatedProject : project
+    ))
+    setAllProjects(newProjects);
+  }
+
   return (
     <div>
       <h1>My Projects</h1>
@@ -63,7 +77,7 @@ const Projects = () => {
         All Projects: 
         {
           allProjects.map((item, index)=>(
-            <ProjectComponent key={index} projectData={item} onDelete={handleDeleteProject}/>
+            <ProjectComponent key={index} projectData={item} onDelete={handleDeleteProject} onEdit={handleEditProject}/>
           ))
         }
       </div>

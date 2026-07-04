@@ -1,3 +1,8 @@
+interface PayloadType{
+    title: string;
+    description: string;
+}
+
 export const createTask = async(payload)=>{
     const url = "http://localhost:3000/api/task"
     const token = localStorage.getItem("token");
@@ -25,8 +30,8 @@ export const createTask = async(payload)=>{
     }
 }
 
-export const getAllTasks = async()=>{
-    const url = "http://localhost:3000/api/task"
+export const getAllTasks = async(projectId)=>{
+    const url = `http://localhost:3000/api/task/project/${projectId}`
     const token = localStorage.getItem("token");
     try{
         const response = await fetch(url, {
@@ -53,7 +58,7 @@ export const getAllTasks = async()=>{
     }
 }
 
-export const editTask = async(payload, taskId)=>{
+export const editTask = async(payload: PayloadType, taskId:string)=>{
     try{
         const url = `http://localhost:3000/api/task/${taskId}`
         const token = localStorage.getItem("token");
@@ -68,7 +73,13 @@ export const editTask = async(payload, taskId)=>{
         const data = await response.json();
         return data;
     }catch(err){
-
+        if(err instanceof Error)
+        {
+            throw new Error(err.message);
+        }
+        else{
+            console.error("Ran into an unexpected error");
+        }
     }
 }
 
