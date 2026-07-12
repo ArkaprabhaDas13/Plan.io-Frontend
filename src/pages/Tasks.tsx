@@ -92,7 +92,7 @@ const Tasks = () => {
       <div>
         All Tasks: 
         {allTasks.map((item, index)=>{
-          return <TaskComponent key={index} data={item} onDelete={handleDelete} onEdit={handleEditTask}/>
+          return <TaskComponent key={index} data={item} onDelete={handleDelete} onEdit={handleEditTask} projectId={projectId}/>
         })}
       </div>
 

@@ -4,6 +4,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 // the interface for the initial state of AuthSlice
 
 interface User{
+    _id: string;
     name: string;
     email: string;
 }

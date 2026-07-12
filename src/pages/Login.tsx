@@ -21,6 +21,7 @@ const Login = () => {
     e.preventDefault();
     try{
       const response = await loginApi(email, password);
+      console.log("Login response = ", response);
       // Save user details to Local Storage
       localStorage.setItem("user", JSON.stringify(response.user));
       localStorage.setItem("token", response.token);

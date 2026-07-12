@@ -1,4 +1,4 @@
-interface PayloadType{
+interface EditPayloadType{
     title: string;
     description: string;
 }
@@ -31,7 +31,7 @@ export const createTask = async(payload)=>{
 }
 
 export const getAllTasks = async(projectId)=>{
-    const url = `http://localhost:3000/api/task/project/${projectId}`
+    const url = `http://localhost:3000/api/project/${projectId}/tasks`
     const token = localStorage.getItem("token");
     try{
         const response = await fetch(url, {
@@ -58,7 +58,32 @@ export const getAllTasks = async(projectId)=>{
     }
 }
 
-export const editTask = async(payload: PayloadType, taskId:string)=>{
+export const getOneTask = async(taskId: string) => {
+    try{
+        const token = localStorage.getItem('token');
+        const response = await fetch(`http://localhost:3000/api/task/${taskId}`, {
+            method: "GET",
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        if(!response)
+        {
+            throw new Error("Error in fetching one task!");
+        }
+        return response.json();
+    }catch(err){
+        if(err instanceof Error)
+        {
+            throw new Error(err.message);
+        }
+        else{
+            console.error("Ran into an unexpected Error");
+        }
+    }
+}
+
+export const editTask = async(payload: EditPayloadType, taskId:string)=>{
     try{
         const url = `http://localhost:3000/api/task/${taskId}`
         const token = localStorage.getItem("token");

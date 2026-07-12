@@ -7,6 +7,7 @@ import Dashboard from '../pages/Dashboard';
 import Projects from '../pages/Projects';
 import Tasks from '../pages/Tasks';
 import Loading from '../pages/Loading';
+import SelectedTask from '../components/Task/SelectedTask';
 
 const AppRoutes = ()=>{
     return(
@@ -19,7 +20,8 @@ const AppRoutes = ()=>{
             {/* PROTECTED ROUTES */}
             <Route path="/dashboard" element={<ProtectedRoutes><Dashboard/></ProtectedRoutes>}/>
             <Route path="/projects" element={<ProtectedRoutes><Projects/></ProtectedRoutes>}/>
-            <Route path="/tasks/:projectId" element={<ProtectedRoutes><Tasks/></ProtectedRoutes>}/>
+            <Route path="/projects/:projectId/tasks" element={<ProtectedRoutes><Tasks/></ProtectedRoutes>}/>
+            <Route path="/projects/:projectId/tasks/:taskId" element={<ProtectedRoutes><SelectedTask/></ProtectedRoutes>}/>
         </Routes>
     )
 }

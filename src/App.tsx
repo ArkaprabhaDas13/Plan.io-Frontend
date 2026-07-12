@@ -25,7 +25,6 @@ const App = () => {
         try{
           // call the /aboutMe api 
           const response = await getUserDetails(token);
-
           dispatch(loginSuccess({
             user: response,
             token

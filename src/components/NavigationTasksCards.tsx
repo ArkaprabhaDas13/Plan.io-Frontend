@@ -5,12 +5,14 @@ import { Navigate } from 'react-router-dom';
 
 const NavigationTasksCards = ({data}) => {
 
-  const [selectedProject, setSelectedProject] = useState("");
+  const [selectedProject, setSelectedProject] = useState(data?.length > 0 ? data[0] : null);
 
   const navigate = useNavigate();
 
   const handleNavigationClick = ()=>{
-    navigate(`/tasks/${selectedProject._id}`);
+    if (selectedProject) {
+      navigate(`/projects/${selectedProject._id}/tasks`);
+    }
   }
 
   const handleChange = (id)=>{
@@ -18,12 +20,16 @@ const NavigationTasksCards = ({data}) => {
     setSelectedProject(project);
   }
 
-  console.log("Selected Project = ", selectedProject);
-
   return (
     <div>
         <h1>Tasks</h1>
-        <select onChange={(e)=>handleChange(e.target.value)} name="selectProject" id="selectProject">
+        <select 
+          onChange={(e)=>handleChange(e.target.value)} 
+          name="selectProject" 
+          id="selectProject"
+          value={selectedProject?._id || ""}
+        >
+          <option value="">Select a project</option>
           {
             data.map((project)=>{
               return (
