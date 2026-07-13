@@ -33,14 +33,19 @@ export const loginApi = async (email: string, password: string) => {
     return response.json();
 }
 
-export const getUserDetails = async (token)=>{
-    const url = "http://localhost:3000/api/auth/aboutme"
+export const getUserDetails = async (token: string)=>{
+    let url = "http://localhost:3000/api/auth/aboutme";
     const response = await fetch(url, {
         method: "GET",
         headers:{
             Authorization: `Bearer ${token}`
         }
     })
+    if(!response.ok)
+    {
+        throw new Error("User unauthorized!")
+    }
     const data = await response.json();
+    localStorage.setItem("user", JSON.stringify(data))
     return data;
 }
