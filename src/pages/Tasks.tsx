@@ -40,8 +40,8 @@ const Tasks = () => {
     if(!projectId) return;
 
     const loadAllTasks = async()=>{
-      const data = await getAllTasks(projectId);
-      setAllTasks(data);
+      const tasks = await getAllTasks(projectId);
+      setAllTasks(tasks.data);
     }
     getProjectDetails();
     loadAllTasks();

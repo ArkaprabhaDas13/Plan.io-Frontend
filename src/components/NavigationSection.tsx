@@ -18,8 +18,8 @@ const NavigationSection = () => {
                         'Authorization' : `Bearer ${token}`
                     }
                 })
-                const data = await response.json();
-                setProjects(data);
+                const projects = await response.json();
+                setProjects(projects.data);
             }catch(err){
                 if(err instanceof Error){
                     throw new Error(err.message);

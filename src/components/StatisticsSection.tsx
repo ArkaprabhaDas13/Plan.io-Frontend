@@ -3,7 +3,7 @@ import React from 'react'
 const StatisticsSection = () => {
   return (
     <div>
-        StatisticsSection
+        <h1>StatisticsSection</h1>
 
         <div>
             Total tasks: 0

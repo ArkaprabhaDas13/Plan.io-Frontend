@@ -27,8 +27,8 @@ const Projects = () => {
 
   useEffect(()=>{
     const handleGetProjects = async ()=>{
-      const data = await getAllProjects();
-      setAllProjects(data);
+      const projects = await getAllProjects();
+      setAllProjects(projects.data);
     }
     handleGetProjects();
   }, [])
@@ -38,11 +38,11 @@ const Projects = () => {
       name: name,
       description: description
     }
-    const data = await createProject(payload);
+    const newProject = await createProject(payload);
     setName("");
     setDescription("");
     const updatedProjects = await getAllProjects();
-    setAllProjects(updatedProjects);
+    setAllProjects(updatedProjects.data);
   }
 
   const handleDeleteProject = async (projectId: string)=>{

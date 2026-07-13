@@ -23,14 +23,14 @@ const Login = () => {
       const response = await loginApi(email, password);
       console.log("Login response = ", response);
       // Save user details to Local Storage
-      localStorage.setItem("user", JSON.stringify(response.user));
-      localStorage.setItem("token", response.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      localStorage.setItem("token", response.data.token);
       // Populate the REDUX STORE
       dispatch(loginSuccess({
-        user: response.user,
-        token: response.token
+        user: response.data.user,
+        token: response.data.token
       }))
-      if(response.user)
+      if(response.data.user)
       {
         navigate("/dashboard");
       }

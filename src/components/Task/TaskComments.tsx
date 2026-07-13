@@ -25,7 +25,7 @@ const TaskComments = ({task}:CommentProp) => {
     useEffect(()=>{
         const getAllComments = async()=>{
             const commentsData = await getComments(task._id);
-            setComments(Array.isArray(commentsData) ? commentsData : []);
+            setComments(Array.isArray(commentsData.data) ? commentsData.data : []);
         }
         getAllComments();
     }, [task._id])
@@ -36,12 +36,12 @@ const TaskComments = ({task}:CommentProp) => {
         const payload = {
             description: commentText,
             taskId: task._id,
-            ...(user?._id ? { createdBy: user._id } : {})
+            ...(user?._id ? { createdBy: user._id } : {}),
         }
 
-        const data = await createComment(payload);
-        if (data) {
-            setComments(prev => [...prev, data]);
+        const commentData = await createComment(payload);
+        if (commentData) {
+            setComments(prev => [...prev, commentData.data]);
             setCommentText("");
         }
     }
